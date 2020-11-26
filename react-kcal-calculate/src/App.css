@@ -36,18 +36,10 @@
      background-color:#f4abc4 !important;
      color: white !important;
    }
-
-   .radioComp{
-     vertical-align: 30px  !important;
-   }
    .radioText{
      color: rgb(112, 112, 112) !important;
      font-family: Roboto !important;
      font-size: 20px  !important;
-   }
-
-   .radioButton:hover{
-    color:#f4abc4 !important;
    }
    
   
