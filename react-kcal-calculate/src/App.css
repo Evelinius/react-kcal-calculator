@@ -1,0 +1,55 @@
+.App {
+  text-align: center;
+}
+
+.App-header {
+  background-color:white;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: calc(30px + 2vmin);
+  color: rgb(116, 110, 110);
+  padding: 10px;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+  .Button {
+     background-color: white !important;
+     margin: 10px !important ;
+     padding: 15px 45px !important;
+     text-align: center !important;
+     text-transform: uppercase !important;
+     transition: 0.5s !important;
+     box-shadow: 0 !important;
+     border-radius: 10px !important;
+     display: block !important;
+     font-size: 20px  !important;
+     color: black !important;
+     box-shadow: 2px 5px 20px rgba(0,0,0,0.3) !important;
+   }
+
+   .Button:hover{
+     background-color:#f4abc4 !important;
+     color: white !important;
+   }
+
+   .radioComp{
+     vertical-align: 30px  !important;
+   }
+   .radioText{
+     color: rgb(112, 112, 112) !important;
+     font-family: Roboto !important;
+     font-size: 20px  !important;
+   }
+
+   .radioButton:hover{
+    color:#f4abc4 !important;
+   }
+   
+  
+  
+
