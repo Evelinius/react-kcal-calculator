@@ -1,16 +1,20 @@
-import React from 'react'
+import React from 'react';
 import './App.css';
 import Button from '@material-ui/core/Button';
 import { FormControl, FormControlLabel, FormLabel } from '@material-ui/core';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import 'fontsource-roboto';
 import { StyledRadio } from './StyledRadio';
+import CustomizedTextField from './StyledForms';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 
 const styles = (theme) => ({
   root: {
     flexGrow: 1,
+  },
+  container: {
+    "width": "calc(100%)"
   },
   header: {
     "display": "flex",
@@ -27,12 +31,6 @@ const styles = (theme) => ({
     "flex-direction": "column",
     "align-items": "center"
   },
-  data: {
-    "display": "flex",
-    "flex-direction": "column",
-    "align-items": "center"
-  }
-
 });
 
 class App extends React.Component {
@@ -74,7 +72,7 @@ class App extends React.Component {
     const { classes } = this.props;
     return (
       <div className={classes.root}>
-        <Grid container spacing={3}>
+        <Grid className={classes.container} container spacing={10}>
           <Grid className={classes.header} item xs={12}>
             Stay cool
           </Grid>
@@ -87,10 +85,10 @@ class App extends React.Component {
                 </RadioGroup>
               </FormControl>
           </Grid>
-          <Grid className={classes.data} item xs={4}>
-            <input type='text' onChange={this.handleAgeChange} value={this.state.age}></input>
-            <input type='text' onChange={this.handleHeightChange} value={this.state.height}></input>
-            <input type='text' onChange={this.handleWeightChange} value={this.state.weight}></input>
+          <Grid className={classes.data} noValidate autoComplete="off" item xs={4}>
+            <CustomizedTextField label="Age" onChange={this.handleAgeChange} value={this.state.age}/>
+            <CustomizedTextField label="Height" onChange={this.handleHeightChange} value={this.state.height}/>
+            <CustomizedTextField label="Weight" onChange={this.handleWeightChange} value={this.state.weight}/>
           </Grid>
           <Grid className={classes.button} item xs={4}> 
           <Button className="Button" onClick={this.calculate}>Calculate</Button>
@@ -130,7 +128,6 @@ const CalculateYourNorma = (height, weight, age, gender, activeCoeff, maintainin
   if (deficit == true) {
     carbsLow = dificitLow - protHigh - fatHigh;
     carbsHigh = dificitHigh - protLow - fatLow;
-
   }
   return (norma, dificitLow, dificitHigh, protLow, protHigh, fatLow, fatHigh, carbsLow, carbsHigh);
 }
