@@ -4,6 +4,7 @@ import TextField from '@material-ui/core/TextField';
 
 const CssTextField = withStyles({
   root: {
+    "width": "200px",
     '& label.Mui-focused': {
       color: 'pink',
     },
@@ -36,14 +37,17 @@ export default function CustomTextField(props) {
 
   return (
     <form className={classes.root} noValidate>
-      <CssTextField
+       <CssTextField
+        error={props.error}
+        helperText={props.error? "It's int lol": undefined}
         label={props.label}
         onChange={props.onChange}
         value={props.value}
         className={classes.margin}
         variant="outlined"
         id="custom-css-outlined-input"
-      />
+        InputProps={props.InputProps}
+       />
     </form>
   );
 }

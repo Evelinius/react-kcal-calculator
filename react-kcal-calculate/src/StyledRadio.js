@@ -57,6 +57,4 @@ const useStyles = makeStyles({
         {...props}
       />
     );
-  }
-  
-  
+  } 
