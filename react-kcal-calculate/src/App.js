@@ -153,7 +153,7 @@ class App extends React.Component {
                   <FormControlLabel value="1.55" control={<StyledRadio />} label="I do intense workouts 5 times a week" />
                   <FormControlLabel value="1.64" control={<StyledRadio />} label="I do workouts every day" />
                   <FormControlLabel value="1.73" control={<StyledRadio />} label="I do intense workouts every day or 2 times a day" />
-                  <FormControlLabel value="1.73" control={<StyledRadio />} label="I do workouts every day and I have a hard work" />
+                  <FormControlLabel value="1.9" control={<StyledRadio />} label="I do workouts every day and I have a hard work" />
                 </RadioGroup>
               </FormControl>
           </Grid>
