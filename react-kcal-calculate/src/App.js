@@ -117,9 +117,6 @@ class App extends React.Component {
     const { classes } = this.props;
     return (
       <div className={classes.root}>
-        <iframe src="https://www.mealty.ru/" width="1000" height="1000" align="left">
-            Ваш браузер не поддерживает встроенные фреймы!
-        </iframe>
         <Grid className={classes.container} container spacing={10}>
           <Grid className={classes.header} item xs={12}>
             Stay cool
@@ -161,7 +158,7 @@ class App extends React.Component {
               </FormControl>
           </Grid>
           <Grid  item xs={6}>
-          <Paper style={{ backgroundColor: '#cfe8fc', height: '50vh', textAlign: 'center' }}>
+          <Paper style={{ backgroundColor: '#cfe8fc', height: '15vh', width: '30vh', textAlign: 'center' }}>
             <div>Calculated value: {this.state.calculatedValue}</div>
           </Paper>
           </Grid>
