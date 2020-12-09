@@ -1,2 +1,9 @@
-﻿node_modules
-*.eslintcache
+﻿calculate-backend/node_modules
+node_modules
+*.lock
+calculate-backend/package-lock.json
+*.log
+react-kcal-calculate/yarn.lock
+react-kcal-calculate/package-lock.json
+package-lock.json
+react-kcal-calculate/.eslintcache
