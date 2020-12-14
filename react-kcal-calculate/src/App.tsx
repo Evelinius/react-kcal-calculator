@@ -11,6 +11,8 @@ import Grid from '@material-ui/core/Grid';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import Paper from '@material-ui/core/Paper';
 import { menu } from './mealtymenu';
+import { CalculatePFC, Gender, Goal } from './formula';
+
 const styles = (theme: any) => ({
   root: {
     flexGrow: 1,
@@ -45,9 +47,6 @@ export interface Props {
   classes: any;
 }
 
-type Gender = 'male' | 'female'
-type Goal = 'maintaining' | 'deficit'
-
 export interface AppState {
   gender: Gender,
   age: number | undefined,
@@ -62,13 +61,13 @@ export interface AppState {
   stage: number,
 
   calculateDificitLow: number | undefined,
-  calculateDificitHigh:  number | undefined,
-  calculateProtLow:  number | undefined,
-  calculateProtHigh:  number | undefined,
-  calculateFatLow:  number | undefined,
-  calculateFatHigh:  number | undefined,
-  calculateCarbsLow:  number | undefined,
-  calculatecarbsHigh:  number | undefined
+  calculateDificitHigh: number | undefined,
+  calculateProtLow: number | undefined,
+  calculateProtHigh: number | undefined,
+  calculateFatLow: number | undefined,
+  calculateFatHigh: number | undefined,
+  calculateCarbsLow: number | undefined,
+  calculatecarbsHigh: number | undefined
 }
 
 class App extends React.Component<Props, AppState> {
@@ -149,15 +148,15 @@ class App extends React.Component<Props, AppState> {
   }
 
   handleGoalChange = (event: any) => {
-    this.setState({ goal: event.target.value})
+    this.setState({ goal: event.target.value })
   }
 
   calculate = () => {
-    const { norma, deficitLow, deficitHigh, protLow, protHigh, fatLow, fatHigh, carbsLow, carbsHigh } = 
+    const { norma, deficitLow, deficitHigh, protLow, protHigh, fatLow, fatHigh, carbsLow, carbsHigh } =
       CalculatePFC(this.state.height ?? 0, this.state.weight ?? 0, this.state.gender, this.state.age ?? 0, this.state.activeCoeff ?? 0, this.state.goal ?? 0)
-    
-      this.setState({
-      calculatedValue: norma == 0? deficitLow: norma,
+
+    this.setState({
+      calculatedValue: norma == 0 ? deficitLow : norma,
       calculateDificitLow: deficitLow,
       calculateDificitHigh: deficitHigh,
       calculateProtLow: protLow,
@@ -170,7 +169,11 @@ class App extends React.Component<Props, AppState> {
   }
 
   next = () => {
-    this.setState({ stage: this.state.stage + 1 })
+    const newStage = this.state.stage + 1;
+    this.setState({ stage: newStage })
+    if (newStage == 4) {
+      this.calculate();
+    }
   }
 
   prev = () => {
@@ -198,7 +201,7 @@ class App extends React.Component<Props, AppState> {
               </div>}
               {this.state.stage == 1 && <div>
                 <FormLabel className="radioText" component="data">Insert your data</FormLabel>
-                <CustomizedTextField error={this.state.ageIsValid} label="Age" onChange={this.handleAgeChange} value={this.state.age} InputProps={undefined}/>
+                <CustomizedTextField error={this.state.ageIsValid} label="Age" onChange={this.handleAgeChange} value={this.state.age} InputProps={undefined} />
                 <CustomizedTextField error={this.state.heightIsValid} label="Height" onChange={this.handleHeightChange} value={this.state.height} InputProps={{
                   startAdornment: <InputAdornment position="start">Cm</InputAdornment>,
                 }} />
@@ -225,24 +228,23 @@ class App extends React.Component<Props, AppState> {
                   <FormLabel className="radioText">Do you want to</FormLabel>
                   <RadioGroup aria-label="goal" name="goal" value={this.state.goal} onChange={this.handleGoalChange}>
                     <FormControlLabel value="maintaining" control={<StyledRadio />} label="Stay cool" />
-                    <FormControlLabel value="deficit" control={<StyledRadio />} label="Lose Weight" />
+                    <FormControlLabel value="deficit" control={<StyledRadio />} label="Lose weight" />
                   </RadioGroup>
                 </FormControl>
               </div>}
               {this.state.stage == 4 && <div>
-              <Button className="Button" onClick={this.calculate}>Calculate</Button>
-              <Paper style={{ backgroundColor: '#white', height: '15vh', width: '30vh', textAlign: 'center', color: 'black', fontFamily: 'Roboto'}}>
-              <div>Your Norma: {Math.round(this.state.calculatedValue)} kcal
+                <Paper style={{ backgroundColor: '#white', height: '15vh', width: '30vh', textAlign: 'center', color: 'black', fontFamily: 'Roboto' }}>
+                  <div>Your Norma: {Math.round(this.state.calculatedValue)} kcal
                 <p>Prot: {Math.round(this.state.calculateProtLow ?? 0)} g </p>
-                <p>Carbs: {Math.round(this.state.calculateCarbsLow ?? 0)} g</p>
-                <p>Fat: {Math.round(this.state.calculateFatLow ?? 0)} g</p>
-              </div>
-            </Paper>
-            </div>}
+                    <p>Carbs: {Math.round(this.state.calculateCarbsLow ?? 0)} g</p>
+                    <p>Fat: {Math.round(this.state.calculateFatLow ?? 0)} g</p>
+                  </div>
+                </Paper>
+              </div>}
             </div>
             <div className={classes.pointers}>
-                <Button className="Prev" onClick={this.prev} disabled={this.state.stage == 0}>Previous</Button>
-                <Button className="Next" onClick={this.next} disabled={this.state.stage == 4}>Next</Button>
+              <Button className="Prev" onClick={this.prev} disabled={this.state.stage == 0}>Previous</Button>
+              <Button className="Next" onClick={this.next} disabled={this.state.stage == 4}>Next</Button>
             </div>
           </Grid>
         </Grid>
@@ -251,61 +253,8 @@ class App extends React.Component<Props, AppState> {
   }
 }
 
-const calculateMaintainNorma = (height: number, weight: number, gender: Gender, age: number, activeCoeff: number) => {
-  if (gender == "female") {
-    return (655 + (9.6 * weight) + (1.8 * height) - (4.7 * age)) * activeCoeff;
-  }
-
-  if (gender == "male") {
-    return (66 + (13.7 * weight) + (5 * height) - (6.8 * age)) * activeCoeff;
-  }
-
-  throw 'gender has wrong value'
-}
-
-const calculateDeficitNorma = (height: number, weight: number, gender: Gender, age: number, activeCoeff: number) => {
-  const norma = calculateMaintainNorma(height, weight, gender, age, activeCoeff);
-  return {low: (norma * 0.9), high: (norma * 0.8) };
-}
-
-const CalculatePFC = (height: number, weight: number, gender: Gender, age: number, activeCoeff: number, goal: Goal) => {
-  let norma = 0;
-  
-  let fatLow = weight;
-  let fatHigh = weight * 1.5;
-
-  let carbsHigh = 0;
-  let carbsLow = 0;
-  let deficitHigh = 0;
-  let deficitLow = 0;
-  let protLow = 0;
-  let protHigh = 0;
-
-  if(goal == "maintaining"){
-    norma = calculateMaintainNorma(height, weight, gender, age, activeCoeff)
-    protLow = (norma * 0.25) / 4;
-    protHigh = (norma * 0.3) / 4;
-    carbsHigh = (norma - protLow * 4 - fatLow * 9) / 4;
-    carbsLow = (norma - protHigh * 4 - fatHigh * 9) / 4;
-  }
-  if(goal == "deficit"){
-    const {low , high} = calculateDeficitNorma(height, weight, gender, age, activeCoeff)
-
-    deficitHigh = high;
-    deficitLow = low;
-
-    protLow = (low * 0.2) / 4;
-    protHigh = (high * 0.3) / 4;
-
-    carbsLow = (deficitLow - protHigh * 4 - fatHigh * 9) / 4;
-    carbsHigh = (deficitHigh -protLow * 4 - fatLow * 9) / 4;
-  }
-
-  return { norma, deficitLow, deficitHigh, protLow, protHigh, fatLow, fatHigh, carbsLow, carbsHigh };
-}
-
 export default withStyles(styles)(App);
 
-function isNumeric(value: string) :boolean{
+function isNumeric(value: string): boolean {
   return /^-?\d+$/.test(value);
 }
