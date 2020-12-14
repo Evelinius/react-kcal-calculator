@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 
@@ -32,14 +32,24 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function CustomTextField(props) {
+export interface Props {
+  error: boolean,
+  label: string,
+  onChange: any,
+  value: any,
+  InputProps: any
+}
+
+export interface AppState {
+}
+export default function CustomTextField(props: Props) {
   const classes = useStyles();
 
   return (
     <form className={classes.root} noValidate>
-       <CssTextField
+      <CssTextField
         error={props.error}
-        helperText={props.error? "It's int lol": undefined}
+        helperText={props.error ? "wrong value" : undefined}
         label={props.label}
         onChange={props.onChange}
         value={props.value}
@@ -47,7 +57,7 @@ export default function CustomTextField(props) {
         variant="outlined"
         id="custom-css-outlined-input"
         InputProps={props.InputProps}
-       />
+      />
     </form>
   );
 }
