@@ -10,8 +10,8 @@ import { makeStyles, withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import Paper from '@material-ui/core/Paper';
-import { menu } from './mealtymenu';
 import { CalculatePFC, Gender, Goal } from './formula';
+import { FoodMenuComponent } from './foodCards';
 
 const styles = (theme: any) => ({
   root: {

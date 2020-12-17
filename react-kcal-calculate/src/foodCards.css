@@ -1,0 +1,17 @@
+.button {
+    background-color: white !important;
+    margin: 10px !important;
+    padding: 10px 10px !important;
+    transition: 0.5s !important;
+    display: block !important;
+    color: black !important;
+    box-shadow: 2px 5px 15px rgb(102, 100, 100) !important;
+    text-align: center !important;
+    width: 200px !important;
+    height: 230px !important;
+}
+
+.button:hover {
+    background-color: #f4abc4 !important;
+    color: white !important;
+}
