@@ -24,7 +24,6 @@ const styles = (theme: any) => ({
     "align-items": "center",
     marginTop: 10,
     height: 350,
-
   },
   header: {
     height: 80,
@@ -246,6 +245,9 @@ class App extends React.Component<Props, AppState> {
               <Button className="Prev" onClick={this.prev} disabled={this.state.stage == 0}>Previous</Button>
               <Button className="Next" onClick={this.next} disabled={this.state.stage == 4}>Next</Button>
             </div>
+          </Grid>
+          <Grid item xs={6}>
+            <FoodMenuComponent/>
           </Grid>
         </Grid>
       </div>

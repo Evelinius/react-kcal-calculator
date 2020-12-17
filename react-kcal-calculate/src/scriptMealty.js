@@ -1,6 +1,6 @@
 //Этот скрипт можно вставить в консоль на сайте милти, он выведет в таблицу название + описание, вес, кбжу и фото блюда
 
-let categories = [...document.querySelectorAll(".category-wrapper")].slice(1, 5),
+let categories = [...document.querySelectorAll(".category-wrapper")].slice(1, 7),
     meals = categories.map((c) => [...c.querySelectorAll(".meal-card")]).flat(),
     getNumber = (meal, selector) => +meal.querySelector(selector).innerText.replace(",", "."),
     getTotal = (info, key) => +((info.weight / 100) * info[key]).toFixed(2),
