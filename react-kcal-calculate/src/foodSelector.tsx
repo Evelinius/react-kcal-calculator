@@ -10,6 +10,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
+
 function getModalStyle() {
     const top = 40;
     const left = 60;
@@ -24,42 +25,27 @@ function getModalStyle() {
 interface Props {
     open: boolean
     handleClose: () => void;
+    onMenuSelect: (menuItem: any) => void;
 }
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
-        paper: {
-            position: 'absolute',
-            width: 500,
-            height: 150,
-            backgroundColor: theme.palette.background.paper,
-            boxShadow: theme.shadows[5],
-            padding: theme.spacing(2, 4, 3),
-        },
-        table: {
-            minWidth: 750,
-        },
-        visuallyHidden: {
-            border: 0,
-            clip: 'rect(0 0 0 0)',
-            height: 1,
-            margin: -1,
-            overflow: 'hidden',
-            padding: 0,
-            position: 'absolute',
-            top: 20,
-            width: 1,
-        },
+        tableRow: {
+            '&:hover': {
+                backgroundColor: '#c7c2bb',
+            },
+            cursor: 'pointer'
+        }
     }),
 );
+
 const rows = menu;
+
 export function AutoSearch(props: any) {
     return (
         <div style={{ width: 300 }}>
-
             <Autocomplete
-                freeSolo
-                id="free-solo-2-demo"
+                id="searcher"
                 disableClearable
                 options={menu.map((option) => option.name)}
                 onChange={props.onSearchChange}
@@ -67,7 +53,7 @@ export function AutoSearch(props: any) {
                     <TextField
                         {...params}
                         onChange={props.onChange}
-                        label="Search input"
+                        label="Enter the name of the meal"
                         margin="normal"
                         variant="outlined"
                         InputProps={{ ...params.InputProps, type: "search" }}
@@ -81,16 +67,20 @@ export function AutoSearch(props: any) {
 export default function FoodSelectorModal(props: Props) {
     const classes = useStyles();
     const [modalStyle] = React.useState(getModalStyle);
-    const [open, setOpen] = React.useState(false);
     const [search, setSearch] = React.useState('');
 
-    const onChange = (event:any) => {
+    const onChange = (event: any) => {
         console.log(event.target.value);
         setSearch(event.target.value);
     }
-    
-    const onSearchChange = (event:any) => {
+
+    const onSearchChange = (event: any) => {
         setSearch(event.target.textContent);
+    }
+
+    const onRowClick = (menuItem: any) => () => {
+        props.handleClose()
+        props.onMenuSelect(menuItem)
     }
 
     return (
@@ -98,10 +88,9 @@ export default function FoodSelectorModal(props: Props) {
             <Dialog
                 open={props.open}
                 onClose={props.handleClose}>
-                    <div style={{paddingLeft: 15}} >
+                <div style={{ paddingLeft: 15 }} >
                     <AutoSearch onSearchChange={onSearchChange} onChange={onChange}></AutoSearch>
-                    </div>
-                
+                </div>
                 <TableContainer>
                     <Table>
                         <TableHead>
@@ -115,19 +104,18 @@ export default function FoodSelectorModal(props: Props) {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {rows.filter(r => r.name.toUpperCase().includes(search.toUpperCase())).map(r => <TableRow>
-                                <TableCell><img style={{width: 100, height: 100}} src={"http://mealty.ru" + r.image}></img></TableCell>
-                                <TableCell>{r.name}</TableCell>
-                                <TableCell>{r.carbohydrates}</TableCell>
-                                <TableCell>{r.proteins}</TableCell>
-                                <TableCell>{r.fats}</TableCell>
-                                <TableCell>{r.calories}</TableCell>
-                            </TableRow>)}
+                            {rows.filter(r => r.name.toUpperCase().includes(search.toUpperCase())).map(r =>
+                                <TableRow className={classes.tableRow} onClick={onRowClick(r)}>
+                                    <TableCell><img style={{ width: 100, height: 100 }} src={"http://mealty.ru" + r.image}></img></TableCell>
+                                    <TableCell>{r.name}</TableCell>
+                                    <TableCell>{r.carbohydrates}</TableCell>
+                                    <TableCell>{r.proteins}</TableCell>
+                                    <TableCell>{r.fats}</TableCell>
+                                    <TableCell>{r.calories}</TableCell>
+                                </TableRow>)}
                         </TableBody>
                     </Table>
                 </TableContainer>
-
-
             </Dialog>
         </div>
     )
