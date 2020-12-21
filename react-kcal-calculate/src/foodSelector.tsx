@@ -81,6 +81,7 @@ export default function FoodSelectorModal(props: Props) {
     const onRowClick = (menuItem: any) => () => {
         props.handleClose()
         props.onMenuSelect(menuItem)
+        setSearch('')
     }
 
     return (
@@ -120,3 +121,4 @@ export default function FoodSelectorModal(props: Props) {
         </div>
     )
 }
+

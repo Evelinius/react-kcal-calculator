@@ -11,7 +11,7 @@ import Grid from '@material-ui/core/Grid';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import Paper from '@material-ui/core/Paper';
 import { CalculatePFC, Gender, Goal } from './formula';
-import { FoodMenuComponent } from './foodCards';
+import { FoodMenuComponent } from './FoodCards/foodCards';
 
 const styles = (theme: any) => ({
   root: {
