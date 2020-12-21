@@ -1,0 +1,10 @@
+.progress {
+    height: 20px;
+    display: flex;
+    border: 4px double black;
+}
+
+.progress-item {
+    width: 0px;
+    transition: width 2s ease-in-out .5s;
+}
