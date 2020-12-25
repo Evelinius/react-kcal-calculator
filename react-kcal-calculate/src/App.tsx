@@ -158,8 +158,10 @@ class App extends React.Component<Props, AppState> {
     const { norma, deficitLow, deficitHigh, protLow, protHigh, fatLow, fatHigh, carbsLow, carbsHigh } =
       CalculatePFC(this.state.height ?? 0, this.state.weight ?? 0, this.state.gender, this.state.age ?? 0, this.state.activeCoeff ?? 0, this.state.goal ?? 0)
 
+    const calories = norma == 0 ? deficitLow : norma
+
     this.setState({
-      calculatedValue: norma == 0 ? deficitLow : norma,
+      calculatedValue: calories,
       calculateDificitLow: deficitLow,
       calculateDificitHigh: deficitHigh,
       calculateProtLow: protLow,
@@ -171,7 +173,7 @@ class App extends React.Component<Props, AppState> {
     });
 
     const kbgu = {
-      calories: norma,
+      calories: calories,
       prot: protLow,
       fat: fatHigh,
       carbs: carbsLow,
@@ -260,7 +262,7 @@ class App extends React.Component<Props, AppState> {
             </div>
           </Grid>
           <Grid item xs={6}>
-            <FoodCards/>
+            <FoodCards />
           </Grid>
         </Grid>
       </div>
