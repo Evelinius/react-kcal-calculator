@@ -6,11 +6,13 @@ import './foodCards.css';
 import { MenuItem } from '../mealtymenu';
 import { Progress, ProgressItem } from '../ProgressBar/progressBar';
 import { connect } from 'react-redux';
-import store from '../store';
+import Badge from '@material-ui/core/Badge';
+
 export interface FoodCard {
     menuItem: MenuItem;
     color: string;
 }
+
 interface Props {
 }
 
@@ -28,7 +30,7 @@ function FoodMenuComponent(props: Props) {
     }
 
     const handleSelect = (menuItem: MenuItem) => {
-        const card = { menuItem: menuItem, color: `rgba(${randomColor()}, ${randomColor()}, ${randomColor()}, 1)` } as FoodCard;
+        const card = { menuItem: menuItem, color: `rgba(${randomColor()}, ${randomColor()}, ${randomColor()}, 0.5)` } as FoodCard;
         foodCards.push(card)
         setFoodCards(foodCards);
     }
@@ -36,6 +38,11 @@ function FoodMenuComponent(props: Props) {
     const randomColor = () => {
         let seed = Math.round(Math.random() * 255)
         return seed;
+    }
+
+    const deleteCard = (card: FoodCard) => () => {
+        const newCards = foodCards.filter(f => f != card)
+        setFoodCards(newCards);
     }
 
     const totalCalories = (props as any).kbgu?.calories;
@@ -95,12 +102,14 @@ function FoodMenuComponent(props: Props) {
         <div>
             <div className="cards">
                 {foodCards.map(i =>
+                <Badge className="badge" badgeContent={'X'} onClick={deleteCard(i)} >
                     <div className="image-container">
                         <img className="image" src={"http://mealty.ru" + i.menuItem.image}></img>
                         <div style={{ backgroundColor: i.color, height: 18 }}>
 
                         </div>
-                    </div>)}
+                    </div>
+              </Badge>)}
                 <Button className="button" onClick={handleOpen}>
                     <AddIcon />
                 </Button>

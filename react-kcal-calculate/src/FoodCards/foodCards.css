@@ -29,3 +29,9 @@
 .image-container {
     padding: 10px !important;
 }
+
+.badge>.MuiBadge-badge {
+    margin-top: 10px;
+    margin-right: 10px;
+    background-color: #f4abc4;
+}
