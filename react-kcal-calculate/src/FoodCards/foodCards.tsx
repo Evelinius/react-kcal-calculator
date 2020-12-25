@@ -5,14 +5,20 @@ import AddIcon from '@material-ui/icons/Add';
 import './foodCards.css';
 import { MenuItem } from '../mealtymenu';
 import { Progress, ProgressItem } from '../ProgressBar/progressBar';
-
+import { connect } from 'react-redux';
+import store from '../store';
 export interface FoodCard {
     menuItem: MenuItem;
     color: string;
 }
-export function FoodMenuComponent() {
+interface Props {
+}
+
+function FoodMenuComponent(props: Props) {
     const [open, setOpen] = React.useState(false);
     const [foodCards, setFoodCards] = React.useState([] as FoodCard[])
+    const [showPercents, setShowPercents] = React.useState(true)
+
     const handleOpen = () => {
         setOpen(true);
     }
@@ -32,10 +38,10 @@ export function FoodMenuComponent() {
         return seed;
     }
 
-    const totalCalories = 2000;
-    const totalProteins = 90;
-    const totalCarbs = 160;
-    const totalFats = 81;
+    const totalCalories = (props as any).kbgu?.calories;
+    const totalProteins = (props as any).kbgu?.prot;
+    const totalCarbs = (props as any).kbgu?.carbs;
+    const totalFats = (props as any).kbgu?.fat;
 
     const getCaloriesProgress: () => ProgressItem[] = () => {
         const progress: ProgressItem[] = foodCards.map(c => {
@@ -72,7 +78,7 @@ export function FoodMenuComponent() {
 
         return progress;
     }
-
+    
     const getFatsProgress: () => ProgressItem[] = () => {
         const progress: ProgressItem[] = foodCards.map(f => {
             const progressItem = {} as ProgressItem;
@@ -100,25 +106,32 @@ export function FoodMenuComponent() {
                 </Button>
                 <FoodSelectorModal onMenuSelect={handleSelect} open={open} handleClose={handleClose} />
             </div>
+            <Button onClick={() => setShowPercents(!showPercents)}>
+                    toggle
+            </Button>
             <div>
                 <div>
                     Calories
                 </div>
-                <Progress  progress={getCaloriesProgress()}></Progress>
+                <Progress progress={getCaloriesProgress()} showPercents = {showPercents}></Progress>
                 <div>
                     Prot
                 </div>
-                <Progress progress={getProtProgress()}></Progress>
+                <Progress progress={getProtProgress()} showPercents = {showPercents}></Progress>
                 <div>
                     Carbs
                 </div>
-                <Progress progress={getCarbsProgress()}></Progress>
+                <Progress progress={getCarbsProgress()} showPercents = {showPercents}></Progress>
                 <div>
                     Fat
                 </div>
-                <Progress progress={getFatsProgress()}></Progress>
+                <Progress progress={getFatsProgress()} showPercents = {showPercents}></Progress>
             </div>
         </div>
-
     )
 }
+const mapStateToProps = (state: any) => ({ kbgu: state?.kbgu })
+
+
+export const FoodCards = connect(mapStateToProps, null)(FoodMenuComponent);
+

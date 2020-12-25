@@ -8,13 +8,20 @@ export interface ProgressItem {
 
 interface Props {
     progress: ProgressItem[];
+    showPercents: boolean;
 }
 
 export function Progress(props: Props) {
-    return (<div className="progress">
-        {props.progress.map(p =>
-            <div className='progress-item' style={{ width: `${p.value}%`, backgroundColor: p.color }}>
+
+    const sum = props.progress.map(p => p.value).reduce((sum, cur) => sum + cur, 0);
+    return (
+        <div>
+            <div className={`progress ${sum > 100 ? 'border-red' : 'border-black'}`}>
+                {props.progress.map(p => <div className="progress-item" style={{ width: `${p.value}%`, backgroundColor: p.color }} />)}
             </div>
-        )}
-    </div>)
+            <div>
+                {props.showPercents && `${sum}%`}
+            </div>
+        </div>
+    )
 }

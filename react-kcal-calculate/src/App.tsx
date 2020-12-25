@@ -11,7 +11,10 @@ import Grid from '@material-ui/core/Grid';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import Paper from '@material-ui/core/Paper';
 import { CalculatePFC, Gender, Goal } from './formula';
-import { FoodMenuComponent } from './FoodCards/foodCards';
+import { FoodCards } from './FoodCards/foodCards';
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux';
+import { ActionTypes } from './store';
 
 const styles = (theme: any) => ({
   root: {
@@ -44,6 +47,7 @@ const styles = (theme: any) => ({
 
 export interface Props {
   classes: any;
+  changeKbgu: any;
 }
 
 export interface AppState {
@@ -164,7 +168,16 @@ class App extends React.Component<Props, AppState> {
       calculateFatHigh: fatHigh,
       calculateCarbsLow: carbsLow,
       calculatecarbsHigh: carbsHigh
-    })
+    });
+
+    const kbgu = {
+      calories: norma,
+      prot: protLow,
+      fat: fatHigh,
+      carbs: carbsLow,
+    }
+
+    this.props.changeKbgu(kbgu);
   }
 
   next = () => {
@@ -247,7 +260,7 @@ class App extends React.Component<Props, AppState> {
             </div>
           </Grid>
           <Grid item xs={6}>
-            <FoodMenuComponent/>
+            <FoodCards/>
           </Grid>
         </Grid>
       </div>
@@ -255,8 +268,21 @@ class App extends React.Component<Props, AppState> {
   }
 }
 
-export default withStyles(styles)(App);
+export default withStyles(styles)(connect(null, dispatchToProps)(App));
 
 function isNumeric(value: string): boolean {
   return /^-?\d+$/.test(value);
+}
+
+function dispatchToProps(dispatch: any) {
+  return {
+    changeKbgu: bindActionCreators(updateKBGU, dispatch)
+  };
+};
+
+function updateKBGU(newKbgu: any) {
+  return {
+    type: ActionTypes.KBGU_CALCULATE,
+    kbgu: newKbgu
+  };
 }

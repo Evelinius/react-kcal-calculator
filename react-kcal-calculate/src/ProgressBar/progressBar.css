@@ -1,10 +1,18 @@
 .progress {
     height: 20px;
     display: flex;
-    border: 4px double black;
+    border: 4px double;
 }
 
 .progress-item {
     width: 0px;
     transition: width 2s ease-in-out .5s;
+}
+
+.border-red {
+    border-color: red
+}
+
+.border-black {
+    border-color: black
 }
