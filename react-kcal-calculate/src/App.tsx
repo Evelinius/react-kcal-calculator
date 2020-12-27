@@ -198,9 +198,7 @@ class App extends React.Component<Props, AppState> {
     const { classes } = this.props;
     return (
       <div className={classes.root}>
-        <Grid className={classes.header} item xs={12}>
-          Stay cool
-          </Grid>
+        <Grid className={classes.header} item xs={12}></Grid>
         <Grid container>
           <Grid item xs={6}>
             <div className={classes.container} >
