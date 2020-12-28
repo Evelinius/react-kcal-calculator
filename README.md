@@ -1,1 +1,1 @@
-# react-kcal-calculator.github.io
+# react-kcal-calculator
