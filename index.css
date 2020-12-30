@@ -1,0 +1,143 @@
+#header {
+    height: 180px;
+    width: 100%;
+    background-color: #43b5a0;
+}
+
+#header1 {
+    height: 70px;
+    width: 100%;
+    background-color: #43b5a0;
+}
+
+#body {
+    background-color: #331a38;
+    margin: 0px;
+    font-family: "Robotron Dot Matrix";
+}
+
+h1 {
+    color: white;
+    font-size: 3em;
+    margin-left: 30px;
+    padding-top: 60px;
+    margin-top: 0px;
+    display: flex;
+    justify-content: center;
+}
+
+h2 {
+    color: white;
+    font-size: 1.9em;
+    padding-top: 20px;
+    padding-bottom: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+#svg {
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+}
+
+#content-gen {
+    display: flex;
+    margin-top: 40px;
+    margin-left: 50px;
+    padding-bottom: 70px;
+    justify-content: center;
+}
+
+#content {
+    display: flex;
+    margin-top: 40px;
+    margin-left: 50px;
+}
+
+#content-revert {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 40px;
+    margin-right: 50px;
+}
+
+#gif {
+    border-style: solid;
+    border-color: #fa448c;
+    border-width: 7px;
+    width: 886px;
+    height: 383px;
+}
+
+#gif1 {
+    border-style: solid;
+    border-color: #fa448c;
+    border-width: 7px;
+    width: 694px;
+    height: 591px;
+}
+
+#gif2 {
+    border-style: solid;
+    border-color: #fa448c;
+    border-width: 7px;
+    width: 694px;
+    height: 591px;
+}
+
+#gif3 {
+    border-style: solid;
+    border-color: #fa448c;
+    border-width: 7px;
+    width: 789px;
+    height: 509px;
+}
+
+#gif4 {
+    border-style: solid;
+    border-color: #fa448c;
+    border-width: 7px;
+    width: 637px;
+    height: 402px;
+}
+
+#gif5 {
+    border-style: solid;
+    border-color: #fa448c;
+    border-width: 7px;
+    width: 1122px;
+    height: 388px;
+    margin-bottom: 60px;
+}
+
+#text-container {
+    color: white;
+    margin-left: 20px;
+    width: 600px;
+    font-size: 1.3em;
+    line-height: 30px;
+}
+
+#text-container1 {
+    color: white;
+    margin-left: 20px;
+    width: 350px;
+    font-size: 1.3em;
+    line-height: 30px;
+}
+
+#footer {
+    background-color: #43b5a0;
+    height: 150px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+#link {
+    color: white;
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}

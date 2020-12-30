@@ -1,12 +1,78 @@
 <!DOCTYPE html>
+<style>
+    html {
+        margin-top: 0px;
+    }
+</style>
 <html>
 
 <head>
-    <link rel="stylesheet" href="indexx.css">
+    <link rel="stylesheet" href="index.css">
 </head>
 
-<body id="content">
-    <img src="../gifs/1raUJPIvPa.gif">
+<body id="body">
+    <div id="header">
+        <style>
+            @font-face {
+                font-family: "Robotron Dot Matrix";
+                src: url("./fonts/19876.otf")
+            }
+        </style>
+        <H1 class="terminal">
+        </H1>
+    </div>
+    <div id="content-gen">
+        <img id="gif" src="gifs/1raUJPIvPa.gif" />
+        <div id="text-container">
+            <p><b>Сalculate your menu for the whole day</b></p>
+            <p>I usually take breakfast and lunch at Mealty and I'm really sick of counting calories, prots, fats and carbs by myself. So I developed a program that calculates the daily cals/prots/fats/carbs intake based on your parameters and takes this
+                rate as a basis, then you can see how much a particular dish fills the norm of your macronutrients.</p>
+        </div>
+    </div>
+    <div id="header1">
+        <h2 class="h2"> How it works</h2>
+    </div>
+    <div id="content">
+        <img id="gif1" src="gifs/UY2iIL3Ya5.gif" />
+        <div id="text-container1">
+            <p>Enter your parameters, chose your goal</p>
+        </div>
+    </div>
+    <div id="content-revert">
+        <div id="text-container1">
+            <p>Then chose the dish. I pulled the menu from the Mealty's site using a script and converted it to JSON. It contains photos, names, number of calories, and so on.</p>
+
+        </div>
+        <img id="gif2" src="gifs/FD3wa9yWsx.gif" />
+    </div>
+    <div id="content">
+        <img id="gif3" src="gifs/612L9mJjTw.gif" />
+        <div id="text-container1">
+            <p>You can choose as many as you want. Each dish is allocated its own random color and it takes its place in the progress bars</p>
+        </div>
+    </div>
+    <div id="content-revert">
+        <div id="text-container1">
+            <p>Oh no, it looks like we'll have to give up this dessert! The app will tell you if you overeat. You can delete the dish from your menu if you want</p>
+        </div>
+        <img id="gif4" src="gifs/zNUdLceOuH.gif" />
+    </div>
+    <div id="content">
+        <img id="gif5" src="gifs/QV8SUyK8Y4.gif" />
+        <div id="text-container1">
+            <p>Hmm... I think I made a mistake when I entered the parameters. Thank god I can fix this quickly</p>
+        </div>
+    </div>
+    <div id="footer">
+        <div id="link">
+            <img id="svg" src="untitled.svg" />
+            <a href="https://github.com/Evelinius/react-kcal-calculator" style="color:white; font-size:1.5em"> Project Gitgub Repository</a>
+        </div>
+    </div>
+
+
 </body>
+<script src="utils/typewriting.min.js"></script>
+<script src="command-style.js"></script>
 
 </html>
